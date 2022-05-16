@@ -1,0 +1,15 @@
+- name: Clone app
+  ansible.builtin.git:
+    repo: "{{ testapp_url }}"
+    dest: "{{ testapp_dir }}"
+
+- name: Docker compose up daemon
+  command: docker-compose up -d --build
+  args:
+    chdir: "{{ testapp_dir }}"
+
+- name: Add hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^'
+    line: '127.0.0.1 orig.tilda.test'

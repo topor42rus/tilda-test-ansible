@@ -1,0 +1,12 @@
+#######################
+# test-tilda PLAYBOOK #
+#######################
+---
+- hosts: "all"
+  become: true
+  vars_files:
+    - vars/default.yaml
+
+  roles:
+  - docker-compose
+  - testapp 
